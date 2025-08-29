@@ -1,0 +1,714 @@
+html,body{ 
+  margin:0; 
+  padding:0; 
+  height:100%;
+}
+
+/* reset */
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:"Georgia",serif;
+  height:100%;
+  background:none;
+}
+
+/* fixed gradient background for whole page */
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:0;
+  /*background:linear-gradient(to bottom,#4B1E0A 0%,#7B3A1F 40%,#C99B66 60%,#B34700 100%);*/
+  /*background:linear-gradient(to bottom,#4B1E0A 0%, #6d2f02 50%,#542503 100%);*/
+/*  background:linear-gradient(to bottom,#4B1E0A 5%, #9f5933 50%,#542503 90%);*/
+  background:linear-gradient(to bottom,#4B1E0A 5%,#512411 90%);
+}
+
+/* ===== HEADER ===== */
+#mainHeader{
+  height: 75px;
+  width:100%;
+  inset:0 auto auto 0;
+  color:#FFD87A;
+  background:linear-gradient(to bottom, rgba(75,30,10,0.3) 0%, rgba(75,30,10,0) 100%);
+  position:fixed;
+  display:flex; align-items:center; justify-content:flex-start;
+  padding-left:20px;                 /* logo sits at x=0 */
+  padding-right:25px;
+  z-index:  10000;
+  transition:height .25s ease;
+  /*overflow:hidden;*/
+}
+
+/* Solid color overlay (fades in via JS) */
+#mainHeader .overlay{
+  position:absolute; inset:0;
+  background:#4B1E0A;
+  opacity:0; pointer-events:none;
+  transition:opacity .25s linear;
+  
+}
+
+/* BRAND block (holds the text) 
+#mainHeader .brand{
+  position:relative;
+  display:flex; align-items:center; gap:10px;
+  font-size:2rem; letter-spacing:.5px; min-width:0;
+
+  /* Provide room for the absolutely positioned logo (150 + 12 gap) 
+  padding-left:162px;            /* start state: text sits to the right of logo 
+  transition:padding-left .35s ease;
+}*/
+
+/* LOGO pinned to far left */
+#mainHeader .logo{
+  position:absolute; left:0; top:50%; transform:translateY(-50%);
+  width:120px; height:auto; display:block;
+  opacity:1; transition:opacity .35s ease;
+  margin-left:20px;           /* เพิ่มระยะขวา */
+}
+
+/* TEXT — hidden and offset LEFT at start */
+#mainHeader .brand-text{
+  color:#FFD87A; white-space:nowrap;
+  opacity:0; transform:translateX(-40px);
+  font-size: 30px;
+  transition:opacity .45s ease, transform .45s ease;
+}
+
+/* ===== After scroll: collapse logo space, show text 20px from left ===== */
+body.swap #mainHeader .brand{
+  padding-left:20px;             /* final inset from the left */
+}
+body.swap #mainHeader .logo{
+  opacity:0;                     /* fade out; no width reserved */
+}
+body.swap #mainHeader .brand-text{
+  opacity:1; transform:translateX(0); /* fade + slide in from LEFT */
+}
+
+/* keep content below the fixed header */
+main{ padding-top:150px;
+ }
+
+
+/* Reset */
+ul { 
+  list-style: none; 
+  margin: 0; padding: 0; }
+
+
+.navbar {
+  margin-left: auto;    /* ดันไปขวาสุด */
+  margin-right: 80px;   /* แล้วถอยกลับมาซ้ายหน่อย (ปรับเลขได้) */
+  display: flex;
+  height: 60px;
+  padding: 0 24px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  position: relative;
+}
+/* Navbar container */
+.navbar ul {
+  display: flex;              /* put items in a row */
+  gap: 20px;                  /* space between links */
+  justify-content: flex-end; /* push items to the right */
+  align-items: center;
+  margin-right: 60px; /* move closer to right edge */
+}
+
+/* Menu links */
+.navbar ul li a {
+  text-decoration: none;
+  color: #fff5d7;             /* your gold color */
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+  font-family: 'Oswald', sans-serif;
+  margin-bottom: 18px;
+  letter-spacing: .03em;
+}
+
+/* Hover effect */
+.navbar ul li a:hover {
+  color: #C97F4B;             /* lighter gold/cream on hover */
+}
+
+
+
+/* Right-side container */
+.right-icons {
+  position: absolute;
+  top: 50%;              /* center vertically in header */
+  right: 20px;           /* distance from the right edge */
+  display: flex;
+  align-items: center;   /* vertical alignment */
+  gap: 20px;             /* spacing between IG & hamburger */
+  transform: translateY(-50%);
+  z-index: 20001;
+}
+
+
+/* Shared style for social icons */
+.right-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff5d7;
+  font-size: 32px;
+  transition: color 0.25s;
+  cursor: pointer;
+}
+
+/* Hover colors */
+.fb-icon:hover { color: #C97F4B; }   /* Facebook blue */
+.ig-icon:hover { color: #C97F4B; }   /* Your gold/bronze hover */
+/* Make hamburger lines change color on hover */
+.hamburger:hover span {
+  background: #C97F4B;
+}
+
+
+.textmain{
+  height: 100px;
+  width: 100%;
+   display: inline-block;
+   margin-top:  30px;
+   padding:  14px 30px;
+   color: #fff5d7;
+   font-size: 1rem;
+   text-decoration: none;
+   transition: all 0.3s ease;
+   cursor: pointer;
+
+}
+.textmain:hover{
+  background-color: #4B1E0A;
+}
+
+/*
+.menu-btn {
+ display: inline-block;
+ margin-top:  30px;
+ padding:  14px 30px;
+ color: #fff5d7;
+ font-size: 1rem;
+ text-decoration: none;
+ transition: all 0.3s ease;
+ cursor: pointer;
+}
+.menu-btn:hover {
+  background-color: #7B2E0D;
+}
+
+.reserv-btn{
+ display: inline-block;
+ margin-top:  30px;
+ padding:  14px 10px;
+ color: #fff5d7;
+ font-size: 1rem;
+ text-decoration: none;
+ transition: all 0.3s ease;
+ cursor: pointer;
+}
+
+.reserv-btn:hover {
+  background-color: #7B2E0D;
+}
+
+
+.online-btn{
+ display: inline-block;
+ margin-top:  30px;
+ padding:  14px 10px;
+/* background-color: #4B1E0A;
+ color: #fff5d7;
+ font-size: 1.2rem;
+ text-decoration: none;
+/* border: 2px solid #FFD87A;*/
+/* border-radius: 6px;
+ transition: all 0.3s ease;
+ cursor: pointer;
+}
+.online-btn:hover {
+  background-color: #7B2E0D;
+}*/
+
+
+/********************* Hamburger button *************
+.hamburger {
+  width:40px;
+  height:22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:0;
+  z-index: 10002;
+}
+
+.hamburger span {
+  display:block;
+  height:3px;
+  width:100%;
+  background: #faebd7;
+  border-radius:2px;
+  transition:all 0.3s ease;
+}
+/* When active → turn into cross 
+.hamburger.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+/* Prevent scroll when menu is open (optional) 
+/*body.menu-open { overflow: hidden; }
+*/
+
+
+
+
+
+
+
+
+/* Half-page overlay that slides in from the right */
+.menu-overlay{
+  position: fixed;
+  left: auto;                /* stop it from pinning left */
+  top: 0;right: 0;   height: 100vh; width: 35vw;
+  background: rgba(75,30,10,0.9);
+  display: flex;
+  align-items: center;       /* จัดแนวตั้งตรงกลาง */
+  z-index: 9999;                /* below the hamburger (which is 10000) */
+  opacity: 0;
+  transform: translateX(-100%);  /* start off-canvas to the right */
+   transition: transform 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;         /* don’t block clicks when hidden */
+  flex-direction: column;
+  padding-top: 200px;
+}
+
+.menu-overlay.show {
+  opacity: 1;
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* ===== รายการเมนู ===== */
+.menu-list  {
+  display: flex;
+  flex-direction: column;
+  /*padding: 0;
+  margin: 0;
+  align-items: center;*/
+  text-align: center; 
+}
+
+.menu-list  li {
+  list-style: none;    /* remove bullets */
+  margin: 20px 0;
+}
+
+.menu-list a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: #fff5d7;   /* สีทองตามธีม */
+  /*font-weight: bold;*/
+}
+
+.menu-list a:hover {
+  color: #C97F4B;   /* สีทองตามธีม */
+  /*text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;*/
+}
+
+/* When open: slide in and accept clicks */
+body.menu-open .menu-overlay{
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+
+
+/******************** Chapter 01 Video present *****************/
+.chapter01{
+  position: relative;
+  max-height: 800px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+
+}
+
+/*
+.chapter01 .video-bg {
+  position: absolute;
+  top:50%;
+  left: 50%;
+min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 1;
+}*/
+
+.chapter01 video {
+width: auto;
+height: 100%;
+object-fit: contain;
+}
+
+.chapter01 .video-overlay {
+position: absolute;
+inset: 0;
+background: linear-gradient(to bottom , rgba(0,0,0, 0.4), rgba(0,0,0,0.55));
+z-index: 2;
+}
+
+.chapter01 .video-content {
+  position :absolute;
+  text-align : center;
+  color: #fff5d7;
+  font-family: 'Oswald', sans-serif;
+  padding: clamp(16px,4vw,64px);
+  text-shadow: 0 2px 12px rgba(0,0,0, 0.6);
+  z-index: 3;top: 5%;
+}
+.chapter01 .video-content h2{
+  font-size: clamp(36px, 8vw ,96px);
+  line-height: .5;    /* spcce between the line */
+  letter-spacing: 0.2px;
+  margin-bottom: .4em;
+
+  /*font-family: "Tilt Warp", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "XROT" 0,
+    "YROT" 0;
+*/
+/*  font-family: "Spectral", serif;
+  font-weight: 500;
+  font-style: normal;*/
+    -webkit-text-stroke:  3px #4B1E0A;
+}
+.chapter01 .video-content p {
+  font-size: clamp(20px, 3vw ,35px);
+  line-height: 1.05;
+  letter-spacing: 1px;
+  margin-bottom: .4em;
+
+  /*font-family: "Tilt Warp", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;*/
+   /* font-family: "Spectral", serif;
+  font-weight: 500;
+  font-style: normal;*/
+}
+
+/******************** Chapter 01 Video present *****************/
+
+
+
+
+
+/******************** Chapter 02 about us *****************/
+
+.chapter02 {
+ max-height: 800px;
+ border-radius: 10px;
+ position: relative;
+ overflow: hidden;
+ display: flex;
+ justify-content: center; /* จัดแนวนอนให้อยู่กลาง */
+ align-items: center;     /* จัดแนวตั้งให้อยู่กลาง */
+/* height: 100vh;           /* ให้สูงเต็มหน้าจอ */
+}
+.chapter02 img {
+  width: 1100px;
+  height: 650px;  /* บังคับความสูง */
+  object-fit: cover; /* กันภาพเบี้ยว */
+  display: block;
+  margin: 0 auto;
+  /*filter: brightness (0.9)  blur(1px);*/
+  opacity: 0.15; /* ค่า 0.0 = โปร่งใสหมด, 1.0 = ชัดเต็ม */
+}
+
+.text02 {
+  font-size: clamp(28px,4vw,44px);
+  font-family: 'Oswald', sans-serif;
+  position: absolute;
+  max-width: 800px;
+  color: #FFF5E1;
+  text-align: center;
+  padding: 20px;
+  z-index: 1;
+}
+
+.text02 h1 {
+font-size: 2.5rem;
+color: #faebd7;
+margin-bottom: 24px;
+}
+
+.text02 p {
+font-size: 20px;
+line-height: 1.7;
+margin-bottom: 15px;
+text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+font-weight: 400;   /* Regular */
+}
+/******************** Chapter 02 about us *****************/
+
+
+
+/******************** Chapter 03 reservation *****************/
+
+
+.chapter03 {
+ max-height: 800px;
+ border-radius: 10px;
+ position: relative; z-index: 2;
+padding: clamp(32px,6vw,80px) 20px;
+background: linear-gradient(to bottom, #D2956E 0%, #E6BE8A 50%, #FFF5D7 100%);
+}
+
+
+/* กล่องเนื้อหา */
+.reserve-wrap{
+  max-width: 1440px;   /* ↑ from 980px so the widget has room to stretch */
+  min-height: 800px;
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+/* หัวข้อ + คำอธิบาย */
+.reserve-title{
+  font-size: clamp(28px,4vw,44px);
+    font-family: 'Oswald', sans-serif;
+  color:#4B1E0A;
+  margin-bottom: 10px;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+.reserve-sub{
+  color:#4B1E0A;
+    font-family: 'Oswald', sans-serif;
+  opacity:.85;
+  margin-bottom: 18px;
+  letter-spacing: .02em;
+}
+
+/* กรอบวิดเจ็ต (iframe ภายในแก้สไตล์ตรง ๆ ไม่ได้) */
+#ot-widget iframe{
+  max-width: 800px;         /* จำกัดความกว้างไม่ให้ยืดทั้งจอ */
+  height: 100%;   /* 160–200 is good for the horizontal bar */
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+    margin: 0 auto;
+}
+
+.reserve-foot {
+  color:#512411;
+  font-family: 'Oswald', sans-serif;
+  opacity:.85;
+  margin-bottom: 18px;
+  letter-spacing: .02em;
+}
+
+/* ปุ่มสำรอง 
+.ot-fallback-btn{
+  display:inline-block;
+  margin-top:16px;
+  background:#4B1E0A;
+  color:#FFD87A;
+  font-weight:700;
+  padding:14px 28px;
+  border-radius:8px;
+  text-decoration:none;
+  transition:.2s ease;
+}
+.ot-fallback-btn:hover{ background:#7B2E0D; color:#FFF5D7; }*/
+/******************** Chapter 03 reservation *****************/
+
+
+
+/******************** Chapter 04 order online *****************/
+
+/* ===== Section 4: Online Order ===== */
+
+/* ให้เลื่อนมาไม่โดน header บังเวลา click #online-order */
+#online-order { scroll-margin-top: 120px; }
+
+/* กล่อง section + พื้นหลัง + เว้นระยะ */
+.chapter04 {
+  position: relative;
+  min-height: 600px;
+  background:linear-gradient(to bottom,#4B1E0A 5%,#612b14 90%);
+  padding: 100px 20px 120px;  /* เผื่อพื้นที่ด้านล่างกันชน footer */
+  z-index: 1;
+}
+
+/* เนื้อหาข้อความ */
+.text04 {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Spectral', serif;
+  font-size: 20px;
+  color: #fff5d7;
+}
+
+/* หัวข้อ */
+.text04 h1{
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(28px,4vw,44px);
+  color: #fff5d7;
+  margin-bottom: 16px;
+}
+.text04 p{
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(14px,2vw,22px);
+  color: #fff5d7;
+  margin-bottom: 16px;
+}
+
+
+.order-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.order-logo {
+  width: 100px; /* ปรับขนาดได้ */
+  height: auto;
+  transition: transform 0.2s ease , box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.order-logo:hover {
+  transform: scale(1.08);
+}
+
+
+#contact { scroll-margin-top: 120px; }
+
+.chapter05 {
+  position: relative;
+  min-height: 600px;
+  background: linear-gradient(to top, #D2956E 0%, #E6BE8A 50%, #FFF5D7 100%);
+  padding: 100px 20px 120px;
+  z-index: 1;
+}
+
+/* เนื้อหาข้อความ */
+.text05 {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Spectral', serif;
+  font-size: 20px;
+  color: #4B1E0A;
+  line-height: 1.35;          /* เดิม 0.75 → อ่านง่ายขึ้น */
+}
+
+/* หัวข้อ */
+.text05 h1{
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(28px,4vw,44px);
+  color: #4B1E0A;
+  margin: 0 0 10px;
+}
+
+.text05 h3{
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(15px,2vw,20px);
+  color: #4B1E0A;
+  margin: 22px 0 6px;   /* more top margin = more gap above heading */
+}
+
+.text05 p{
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(12px,2vw,18px);
+  color: #4B1E0A;
+    margin: 4px 0 14px;   /* more bottom margin under text */
+}
+
+/* ← ที่เคยพิมพ์ผิด: ต้องมีจุดหน้าคลาส .text05 */
+.text05 p .day  { font-weight: 700; }   /* วันตัวหนา */
+.text05 p .time { font-weight: 400; }   /* เวลาเป็นตัวปกติ */
+
+.map-container {
+  max-width: 1000px;
+  margin: 12px auto 0;
+  border: 3px solid #FFD87A;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+
+
+
+
+/*************** footer **************/
+.fixed-footer {
+  position: fixed;
+  left: 0;   
+  bottom: 0 ;
+  width: 100%;
+  background-color: #612b14;
+  color: #fff5d7;
+  text-align: center;
+  padding:  10px 0;
+  font-size: 12px;
+  z-index:  9998;
+}
+
+.fixed-footer a {
+  color: inherit;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.fixed-footer a:hover{
+  font-weight: bold;
+}
+
+
+
+
+/* Reduced motion */
+@media (prefers-reduced-motion:reduce){
+  #mainHeader, #mainHeader .brand{ transition:none; }
+  #mainHeader .logo, #mainHeader .brand-text{ transition:none; transform:none; opacity:1; }
+  .video-bg {display: none;}
+  .chapter01{ background: #4B1E0A;}
+}
+
+@supports (-webkit-touch-callout: none){
+.video-bg {height: 100vh;}
+}
+

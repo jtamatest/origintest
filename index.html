@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Origin Thai Bar & Cuisine</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- font link-->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" >
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header id="mainHeader">
+    <div class="overlay"></div>
+    <div class="logo-wrap">
+      <img src="images/logo_07.svg" alt="The Origin Thai logo" class="logo">
+    </div>
+    <span class="brand-text">THE ORIGIN THAI</span>
+   <!-- group icons to the right -->
+      <!-- Facebook LOGO -->
+    <nav class="navbar">
+    <ul>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="#reserve">Reserve</a></li>    
+    <li><a href="#online-order">Online</a></li> 
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+
+ <div class="right-icons">
+      <a href="https://www.facebook.com/profile.php?id=61579854062739" target="_blank" class="fb-icon">
+        <i class="fa-brands fa-facebook"></i>
+      </a>
+      <!-- IG LOGO -->
+      <a href="https://www.instagram.com/originthainc/" target="_blank" class ="ig-icon">
+       <i class="fa-brands fa-instagram"></i>
+      </a>
+     <!-- Hamburger Menu 
+      <div class="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>-->
+    </div>
+  </header>
+
+  <!-- Right-side overlay (half page) -->
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+    <nav class="menu-list">
+  <!--เมนูด้านขวา -->
+    <ul>
+    <li><a href="menu.html">MENU</a></li>
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#reserve">RESERVATION</a></li>    เดิม #RR 
+    <li><a href="#online-order">ONLINE ORDER</a></li>  เดิม #OO 
+    <li><a href="#contact">CONTACT</a></li>
+    <li><a href="#family-friends">FAMILY AND FRIEND</a></li>
+    </ul>
+  </nav>
+  </div>
+
+<main>
+  
+    <!--------------  Section 1 Video present ------------>
+<section class="chapter01">
+  <video class="video-bg" autoplay muted loop playsinline>
+    <source src="videos/testvideo02.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="video-overlay"></div>
+
+  <div class="video-content">
+    <h2>Welcome To</h2><br>
+    <h2>The Origin Thai</h2>
+        <!--<p>Bar & Cuisine</p>-->
+</div>
+</section>
+
+
+  <!------------  Section 2 About us ------------>
+  <section class="chapter02" id="about">
+    <div class="gallery02">
+      <img src="images/place_01_02.png" alt="Bar Sketch 1">
+    </div>
+    <div class="text02">
+    <H1>ABOUT</H1>
+    <P>
+        Welcome to The Origin Thai, where our passion is to introduce the Smithfield community to the bold and diverse 
+        flavors of Thai cuisine. Our culinary team, led by a seasoned female chef, expertly combines traditional 
+        recipes with innovative flair. </P>
+    <p> Complementing our dining experience, our experienced female mixologist has crafted unique cocktails in a lively bar 
+        setting. At The Origin Thai, we strive to provide a warm and inviting atmosphere, perfect for intimate meals or 
+        social gatherings. Our goal is to become your go-to destination, a place where you'll always feel at home.</p>   
+  </div>
+</section>
+
+<!------------  Section 3 Reservation ------------>
+<section class="chapter03" id="reserve" >
+    <div class ="reserve-wrap">
+      <h1 class="reserve-title">Reservations</h1>
+      <p class="reserve-sub">Call us at (xxx)-xxx-xxxx or book a table through Open Table:</p><br>
+     <!-- Example OpenTable widget with sample RID -->
+        <div id="ot-widget">
+          <script type="text/javascript"
+          src="//www.opentable.com/widget/reservation/loader?rid=1356454&domain=com&type=standard&theme=wide&lang=en&overlay=false&iframe=true&dark=true">
+          </script>
+        </div>
+      <h2 class="reserve-foot" ><br><br>EVENTS<br>
+        Hosting a private party or have a special occasion?<br> We’re here to help. Please contact us for assistance.</h2>
+  </div>
+</section>
+
+
+<!--------------  Section 4 Online Order ------------->
+<section class="chapter04" id="online-order">
+  <div class="text04">
+    <h1>Online Order</h1>
+    <p> Ordering your favorite dishes from our restaurant is now even easier with our online ordering system.It's user-friendly and allows you to customize your order and track its progress from the comfort of your own home.<br><br></p>
+
+    <!-- ปุ่มสั่งออนไลน์ (ถ้ามีลิงก์จริง ใส่ href ได้เลย) -->
+    <!-- <a class="order-btn" href="https://your-online-order-link" target="_blank" rel="noopener">Order Now</a> -->
+  </div>
+  <div class="order-links">
+    <!-- Uber-->
+     <a href = "https://www.ubereats.com/store/saranrom-thai/q5GtJpgiRraU_mhLfXJaDw?srsltid=AfmBOootlS0IP6qvISpQgNCqrvD-XY6xyG9-C59p-ZzVNCPROYAukZeh" target = "_blank">
+      <img src="images/online1.svg" alt="The Origin Thai logo" class="order-logo">
+     </a>
+     <!-- Grabhub-->
+      <a href = "https://www.grubhub.com/restaurant/saranrom-thai-8110-broadway-elmhurst/335902" target = "_blank">
+        <img src="images/online3.svg" alt="The Origin Thai logo" class="order-logo">
+     </a>
+       <!-- Door Dash-->
+      <a href = "https://www.doordash.com/store/saranrom-thai-24784487/?srsltid=AfmBOopQtf-s2dtdgNcWjFosu9OepT47RYvt2HM0uduo2dfivKfIsoIq" target = "_blank">
+        <img src="images/online2.svg" alt="The Origin Thai logo" class="order-logo">
+     </a>
+  </div>
+</section>
+
+<!--------------  Section 5 Contact ------------->
+<section class="chapter05" id="contact">
+  <div class="text05">
+    <h1>Contact Us</h1>
+    <h3>Open Hour</h3>
+    <p><span class="day">Sunday–Thursday:</span> <span class="time">11:30–21:30</span></p>
+    <p><span class="day">Friday–Saturday:</span> <span class="time">11:30–22:30</span></p>
+    <p><span class="day">We close on Tuesday</span></p>
+
+    <h3>Phone</h3>
+    <p>xxx-xxx-xxx</p>
+
+    <h3>Email</h3>
+    <p>theoriginnc@gmail.com</p>
+
+    <h3>Location</h3>
+    <p>519 Outlet Center Dr, Smithfield, NC 27577 or Click below</p>
+  </div>
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3309.029423726041!2d-78.34341222421543!3d35.50869324269883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89ac87d5c6f43c3f%3A0x1234567890abcdef!2s519%20Outlet%20Center%20Dr%2C%20Smithfield%2C%20NC%2027577!5e0!3m2!1sen!2sus!4v1693170832214!5m2!1sen!2sus"
+      width="100%"
+      height="450"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+
+
+
+
+
+</main>
+
+  <!-- <a href="https://maps.app.goo.gl/fWrk3A2Pe22PUa167" class="botton-info">
+    519 Outlet Center Dr, Smithfield, NC 27577
+  </a> -->
+<footer class = "fixed-footer">
+   <a href="https://maps.app.goo.gl/fWrk3A2Pe22PUa167" class="botton-info">
+    519 Outlet Center Dr, Smithfield, NC 27577
+  </a>
+</footer>
+  <script src="script.js"></script>
+</body>
+</html>
