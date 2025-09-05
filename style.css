@@ -1,0 +1,777 @@
+/* ========= BREAKPOINTS ========= */
+:root{
+  --bp-phone:   480px;
+  --bp-tablet:  768px;
+  --bp-desktop: 1024px;
+}
+
+
+html,body{ 
+  margin:0; 
+  padding:0; 
+  height:auto;
+  width: 100%;
+    overflow-x: hidden; /* ปิด scroll ด้านข้าง */
+}
+
+
+/* reset */
+*{
+  max-width: 100%;  /* ป้องกันภาพ/วิดีโอ/กล่องบาน */
+  box-sizing:border-box;
+  margin:0;
+  padding:0
+}
+img, video { max-width:100%; height:auto; display:block; }
+
+
+body{
+  font-family:"Georgia",serif;
+  height:100%;
+  background:none;
+}
+
+/* fixed gradient background for whole page */
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:0;
+  background:linear-gradient(to bottom,#4B1E0A 5%,#512411 90%);
+}
+
+/* ===== HEADER ===== */
+#mainHeader{
+  position:fixed;
+  top:0; left:0; right:0;
+  height: 72px;
+  display:flex; align-items:center; 
+  gap:16px;
+  padding: 0 16px 0 12px;
+  background: linear-gradient(to bottom,#4B1E0A 0%, #512411 100%);
+  color:#FADD84;
+  z-index: 10000;
+ transition:height .25s ease;
+}
+
+/* Solid color overlay (fades in via JS) */
+#mainHeader .overlay{
+  position:absolute; inset:0;
+  background:#4B1E0A;
+  opacity:0; pointer-events:none;
+  transition:opacity .25s linear;
+}
+.logo-wrap{ position:relative; z-index:1; display:flex; align-items:center; }
+.logo{ display:block;   
+  height: clamp(36px, 7vw, 64px);
+  width: auto;
+  max-width: none; }
+
+
+
+/* LOGO pinned to far left */
+#mainHeader .logo{
+  position:absolute; left:0; top:50%; transform:translateY(-50%);
+  width:120px; height:auto; display:block;
+  opacity:1; transition:opacity .35s ease;
+  margin-left:20px;           /* เพิ่มระยะขวา */
+}
+
+/* TEXT — hidden and offset LEFT at start */
+#mainHeader .brand-text{
+  color:#FFD87A; white-space:nowrap;
+  opacity:0; transform:translateX(-40px);
+  font-size: 30px;
+  transition:opacity .45s ease, transform .45s ease;
+}
+
+
+
+/* ===== After scroll: collapse logo space, show text 20px from left ===== */
+body.swap #mainHeader .brand{
+  padding-left:20px;             /* final inset from the left */
+}
+body.swap #mainHeader .logo{
+  opacity:0;                     /* fade out; no width reserved */
+}
+body.swap #mainHeader .brand-text{
+  opacity:1; transform:translateX(0); /* fade + slide in from LEFT */
+}
+
+body.menu-open #mainHeader, #mainHeader .overlay {
+  background:transparent;
+}
+/* ซ่อน logo และ brand-text ตอนเมนูเปิด */
+body.menu-open #mainHeader .logo-wrap,
+body.menu-open #mainHeader .brand-text {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Reset */
+ul { 
+  list-style: none; 
+  margin: 0; padding: 0; }
+
+
+.navbar {
+  margin-left: auto;    /* ดันไปขวาสุด */
+  margin-right: 80px;   /* แล้วถอยกลับมาซ้ายหน่อย (ปรับเลขได้) */
+  display: none;
+  height: 60px;
+  padding: 0 24px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  position: relative;
+}
+/* Navbar container */
+.navbar ul {
+  list-style: none;
+  display: flex;              /* put items in a row */
+  gap: 1.25rem;                  /* space between links */
+  justify-content: flex-end; /* push items to the right */
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  /*  margin-right: 60px; /* move closer to right edge */
+}
+
+/* Menu links */
+.navbar ul li a {
+  text-decoration: none;
+  color: #fff5d7;             /* your gold color */
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+  font-family: 'Oswald', sans-serif;
+  margin-bottom: 18px;
+  letter-spacing: .03em;
+}
+
+/* Hover effect */
+.navbar ul li a:hover {
+  color: #C97F4B;             /* lighter gold/cream on hover */
+}
+
+/* Right-side container */
+.right-icons {
+  position: absolute;
+  top: 50%;              /* center vertically in header */
+  right: 20px;           /* distance from the right edge */
+  display: flex;
+  align-items: center;   /* vertical alignment */
+  gap: 10px;             /* spacing between IG & hamburger */
+  transform: translateY(-50%);
+  z-index: 20001;
+}
+
+
+/* กล่องไอคอน/ปุ่มให้หน้าตาเหมือนกัน */
+.right-icons a{
+  display:grid;               /* ไว้สำหรับไอคอน FB/IG */
+  place-items:center;
+  width:36px; height:36px;
+  color:#FFF5D7;
+  text-decoration:none;
+  transition:transform .15s ease, background .2s, border-color .2s, color .2s;
+
+}
+
+.right-icons .hamburger{
+   width:36px; height:36px;
+  color:#FFF5D7;
+}
+
+
+
+/* ไอคอน FB/IG ขนาด */
+.right-icons a i{ font-size:30px; }
+
+/* hover/focus */
+.right-icons a:hover,
+.right-icons .hamburger:hover{
+  transform:translateY(-1px);
+  border-color:#C97F4B;
+  color:#C97F4B;
+}
+
+
+
+.textmain{
+  height: 100px;
+  width: 100%;
+   display: inline-block;
+   margin-top:  30px;
+   padding:  14px 30px;
+   color: #fff5d7;
+   font-size: 1rem;
+   text-decoration: none;
+   transition: all 0.3s ease;
+   cursor: pointer;
+
+}
+.textmain:hover{
+  background-color: #4B1E0A;
+}
+
+/* ===== Hamburger Button ===== */
+.hamburger {
+  position: static;                /* อยู่ใน .right-icons */
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;                       /* ใช้ border จาก .right-icons แทน */
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  gap: 3px;
+}
+
+/* เส้นของ hamburger */
+.hamburger span {
+  display: block;
+  width: 21px;
+  height: 3px;                    /* เปลี่ยนเป็น 2px ได้ถ้าต้องการบางลง */
+  background: currentColor;
+  border-radius: 3px;
+  margin: 0;
+  transition: transform 0.25s, opacity 0.2s;
+}
+
+
+/* เก็บเอฟเฟกต์เป็น X เมื่อ active */
+.hamburger.active span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+.hamburger.active span:nth-child(2){ opacity:0; }
+.hamburger.active span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+
+body.menu-open { overflow: hidden; }
+
+
+/* Half-page overlay that slides in from the right */
+.menu-overlay{
+  position: fixed;
+  inset: 0;                         /* << คลุมทั้งจอ */
+/*  top: 0;right: 0;   height: 100vh; width: 35vw;*/
+  background: rgba(75,30,10,0.9);
+  backdrop-filter: blur(2px);
+  z-index: 9999;                /* below the hamburger (which is 10000) */
+
+  display: grid;                    /* จัดเมนูให้อยู่กลาง */
+  place-items: center;
+  opacity: 0;
+  visibility: hidden;
+  /*display: flex;*/
+  align-items: center;       /* จัดแนวตั้งตรงกลาง */
+  pointer-events: none;
+  transform: translateX(100%);      /* ซ่อนแบบเลื่อนจากขวา (จะเปลี่ยนเป็น 0 ตอนเปิด) */
+  transition: opacity .28s ease, visibility .28s ease, transform .28s ease;
+  
+
+}
+
+body.menu-open .menu-overlay{
+  transform: translateX(0);
+  opacity: 1;                 /* <- ทำให้เห็น */
+  pointer-events: auto;       /* <- คลิกได้ */
+  visibility: visible;
+}
+
+
+
+
+
+
+/* ===== รายการเมนู ===== */
+.menu-list  {
+  display: flex;
+  flex-direction: column;
+  /*padding: 0;
+  margin: 0;
+  align-items: center;*/
+  text-align: center; 
+}
+
+.menu-list  li {
+  list-style: none;    /* remove bullets */
+  margin: 20px 0;
+}
+
+.menu-list a{ color:#FADD84; text-decoration:none; font:700 20px/1.2 "Oswald", sans-serif; }
+
+.menu-list a:hover {
+  color: #C97F4B;   /* สีทองตามธีม */
+  /*text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;*/
+}
+
+
+
+
+
+/******************** Chapter 01 Video present *****************/
+.chapter01{
+    position: relative;
+    width: 100%;
+    height: 100vh; /* เต็มจอ */
+    overflow: hidden;
+}
+
+
+.chapter01 video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /*display: block;
+  z-index: 0;*/
+}
+
+
+
+
+.chapter01 .video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4); /* ใส่ overlay มืด */
+  z-index: 2;
+}
+
+.chapter01 .video-content {
+  position :relative;
+  z-index: 3;
+  color: #fff5d7;
+  text-align : center;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 90%;
+}
+
+.chapter01 .video-content h2{
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(3rem, 5vw, 8rem); /* responsive font */
+    line-height: 1.2;
+    margin: 0;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+}
+
+
+.chapter01 .video-content p {
+  font-size: clamp(20px, 3vw ,35px);
+  line-height: 1.05;
+  letter-spacing: 1px;
+  margin-bottom: .4em;
+
+}
+
+/******************** Chapter 01 Video present *****************/
+
+
+
+
+
+/******************** Chapter 02 about us *****************/
+
+.chapter02 {
+ max-height: 800px;
+ border-radius: 10px;
+ position: relative;
+ overflow: hidden;
+ display: flex;
+ justify-content: center; /* จัดแนวนอนให้อยู่กลาง */
+ align-items: center;     /* จัดแนวตั้งให้อยู่กลาง */
+/* height: 100vh;           /* ให้สูงเต็มหน้าจอ */
+}
+.chapter02 img {
+  width: 100vw;
+  height: 100%;  /* บังคับความสูง */
+  object-fit: cover; /* กันภาพเบี้ยว */
+  display: block;
+  margin: 0 auto;
+  /*filter: brightness (0.9)  blur(1px);*/
+  opacity: 0.9; /* ค่า 0.0 = โปร่งใสหมด, 1.0 = ชัดเต็ม */
+}
+
+.text02 {
+  font-size: clamp(28px,4vw,44px);
+  font-family: 'Oswald', sans-serif;
+  position: absolute;
+  max-width: 800px;
+  color: #FFF5E1;
+  text-align: center;
+  padding: 20px;
+  z-index: 1;
+}
+
+.text02 h2 {
+font-size: 2.5rem;
+color: #faebd7;
+margin-bottom: 24px;
+}
+
+.text02 p {
+font-size: 20px;
+line-height: 1.7;
+margin-bottom: 15px;
+text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+font-weight: 400;   /* Regular */
+}
+/******************** Chapter 02 about us *****************/
+
+
+
+/******************** Chapter 03 reservation *****************/
+.chapter03 {
+  min-height: clamp(800px, 85vh, 1200px);  /* tall on big screens, still OK on small */
+  padding: clamp(48px, 7vw, 120px) 20px;   /* more generous vertical padding */
+ border-radius: 10px;
+ position: relative; z-index: 2;
+background: linear-gradient(to bottom, #D2956E 0%, #E6BE8A 50%, #FFF5D7 100%);
+}
+
+
+/* กล่องเนื้อหา */
+.reserve-wrap{
+  max-width: 1440px;   /* ↑ from 980px so the widget has room to stretch */
+  margin: 0 auto;
+  text-align: center;
+  display: flex;               /* เพิ่ม */
+  flex-direction: column;    
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px; 
+}
+/* หัวข้อ + คำอธิบาย */
+.reserve-title{
+  margin: 0;
+  font-size: clamp(28px,4vw,44px);
+  font-family: 'Oswald', sans-serif;
+  color:#4B1E0A;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+.reserve-sub{
+  margin: 6px 0 8px; 
+  color:#4B1E0A;
+  font-family: 'Oswald', sans-serif;
+  opacity:.85;
+  letter-spacing: .02em;
+}
+
+/* --- 1) Clamp the wide widget height & clip the excess --- */
+#ot-widget-wide{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;            /* remove extra vertical padding */
+  height: 112px;         /* tweak 100–120px to taste */
+  overflow: hidden;      /* hide the extra space inside the iframe */
+}
+#ot-widget-wide iframe{
+  display: block;
+  height: 112px !important;   /* match the container height */
+  margin: 0 auto !important;
+}
+
+#ot-widget-compact {
+  display: none;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+
+.reserve-foot {
+  margin-top: 8px;
+  color:#512411;
+  font-family: 'Oswald', sans-serif;
+  opacity:.85;
+  letter-spacing: .02em;
+  text-align: center;
+  line-height: 1.5;
+
+}
+
+/******************** Chapter 04 order online *****************/
+
+/* ===== Section 4: Online Order ===== */
+
+/* ให้เลื่อนมาไม่โดน header บังเวลา click #online-order */
+#online-order { scroll-margin-top: 120px; }
+
+/* กล่อง section + พื้นหลัง + เว้นระยะ */
+.chapter04 {
+  position: relative;
+  min-height: 600px;
+  background: url("images/wallpaper_04.png") no-repeat center center/cover;
+  padding: 100px 20px 120px;  /* เผื่อพื้นที่ด้านล่างกันชน footer */
+  z-index: 1;
+}
+
+
+
+/* เนื้อหาข้อความ */
+.text04 {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Spectral', serif;
+  font-size: 20px;
+  color: #fff5d7;
+}
+
+/* หัวข้อ */
+.text04 h2{
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(28px,4vw,44px);
+  color: #fff5d7;
+  margin-bottom: 16px;
+}
+.text04 p{
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(14px,2vw,22px);
+  color: #fff5d7;
+  margin-bottom: 16px;
+}
+
+
+.order-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.order-logo {
+  width: 100px; /* ปรับขนาดได้ */
+  height: auto;
+  transition: transform 0.2s ease , box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.order-logo:hover {
+  transform: scale(1.08);
+}
+
+
+#contact { scroll-margin-top: 120px; }
+
+.chapter05 {
+  position: relative;
+  min-height: 600px;
+  background: linear-gradient(to top, #D2956E 0%, #E6BE8A 50%, #FFF5D7 100%);
+  padding: 100px 20px 120px;
+  z-index: 1;
+}
+
+/* เนื้อหาข้อความ */
+.text05 {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Spectral', serif;
+  font-size: 20px;
+  color: #4B1E0A;
+  line-height: 1.35;          /* เดิม 0.75 → อ่านง่ายขึ้น */
+}
+
+/* หัวข้อ */
+.text05 h2{
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(28px,4vw,44px);
+  color: #4B1E0A;
+  margin: 0 0 10px;
+}
+
+.text05 h3{
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(15px,2vw,20px);
+  color: #4B1E0A;
+  margin: 22px 0 6px;   /* more top margin = more gap above heading */
+}
+
+.text05 p{
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(12px,2vw,18px);
+  color: #4B1E0A;
+    margin: 4px 0 14px;   /* more bottom margin under text */
+}
+
+/* ← ที่เคยพิมพ์ผิด: ต้องมีจุดหน้าคลาส .text05 */
+.text05 p .day  { font-weight: 700; }   /* วันตัวหนา */
+.text05 p .time { font-weight: 400; }   /* เวลาเป็นตัวปกติ */
+
+.map-container {
+  max-width: 1000px;
+  margin: 12px auto 0;
+  border: 3px solid #FFD87A;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+
+
+
+
+/*************** footer **************/
+.fixed-footer {
+  position: fixed;
+  left: 0;   
+  bottom: 0 ;
+  width: 100%;
+  background-color: #612b14;
+  color: #fff5d7;
+  text-align: center;
+  padding:  10px 0;
+  font-size: 12px;
+  z-index:  9998;
+  max-width: 100%;
+  overflow-x: hidden;
+  white-space: normal;  /* ให้ตัดบรรทัดถ้าข้อความยาว */
+  text-align: center;
+  box-sizing: border-box; /* ป้องกัน padding ดันเกินจอ */
+}
+
+
+.fixed-footer a {
+  color: inherit;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.fixed-footer a:hover{
+  font-weight: bold;
+}
+
+
+
+
+/* Reduced motion */
+@media (prefers-reduced-motion:reduce){
+  #mainHeader, #mainHeader .brand{ transition:none; }
+  #mainHeader .logo, #mainHeader .brand-text{ transition:none; transform:none; opacity:1; }
+  .video-bg {display: none;}
+  .chapter01{ background: #4B1E0A;}
+}
+
+@supports (-webkit-touch-callout: none){
+.video-bg {height: 100vh;}
+}
+
+@media (min-width: var(--bp-desktop)) {
+  .hamburger {
+    display: none !important;
+  }
+  .navbar {
+    display: flex !important;   /* โชว์เมนูตลอด */
+  }
+  .menu-overlay {
+    display: none !important;   /* กันไม่ให้ overlay โผล่ */
+  }
+}
+
+
+
+/* ====== Mobile tweaks ====== */
+@media (max-width: 800px){
+  /* header เล็กลงนิด */
+  #mainHeader{
+    height: 64px;
+    padding-left: 12px;
+    padding-right: 16px;
+  }
+
+  /* โลโก้ซ้าย ย่อขนาด */
+  #mainHeader .logo{
+    width: 78px;          /* เดิม 120px */
+    margin-left: 12px;
+  }
+  /* ถ้าหน้าจอเล็กกว่า 768px → ซ่อน wide, แสดง compact */
+  #ot-widget-wide { display: none; }
+  #ot-widget-compact { display: flex; }
+  #ot-widget-compact iframe{
+    width:100% !important; max-width:420px; margin:0 auto; border-radius:10px;
+  }
+}
+
+/* จอเล็กมาก ๆ ย่อเพิ่มอีกนิด */
+@media (max-width: var(--bp-phone)){
+  #mainHeader .logo{ width: 64px; }    /* ย่อโลโก้ */
+  .right-icons{ right:10px; gap: 0px; }
+  .right-icons a, .right-icons .hamburger{ width:32px; height:32px;}
+  .right-icons a i{ font-size:20px; }
+  .hamburger span{ width:16px; }
+}
+
+
+
+.menu-list ul{ list-style:none; display:flex; flex-direction:column; gap:18px; padding:0; margin:0; text-align:center; }
+
+
+
+
+
+/* push content below fixed header */
+main{ padding-top: 84px; }
+
+/* ========= TABLET  ========= */
+@media (min-width: var(--bp-tablet)){
+  #mainHeader{ height: 78px; padding: 0 18px; }
+  .logo{ width: 88px; }
+  .right-icons{ right: 68px; }
+  .right-icons a{ font-size:24px; }
+  .menu-overlay{ inset:0 0 0 50vw; } /* smaller panel on tablet */
+  .brand-text{ display:block; font-size:24px; }
+}
+
+/* tablet */
+@media (max-width: var(--bp-desktop)){
+  .brand-text{
+    font-size: 22px;   /* ย่อหน่อย */
+  }
+}
+
+/* mobile */
+@media (max-width: var(--bp-tablet)){
+  .brand-text{
+    font-size: 18px;   /* ไม่หาย แค่เล็กลง */
+  }
+}
+
+/* tiny phones */
+@media (max-width: var(--bp-phone)){
+  .brand-text{
+    font-size: 16px;
+  }
+}
+
+/* ========= DESKTOP ========= */
+@media (min-width: 1024px){
+  /* show desktop nav; hide hamburger & overlay */
+.navbar{ display:flex; margin-left:auto; }  /* desktop ใช้ navbar ปกติ */
+.hamburger{ display:none  !important;}                 /* desktop ซ่อน hamburger */
+  .menu-overlay{ display:none !important; }
+
+  #mainHeader{ height: 84px; padding: 0 24px; }
+  .logo{ width: 110px; }
+  .right-icons{
+    position:static; transform:none; margin-left:16px; order: 3;
+  }
+  .right-icons a{ font-size:28px; }
+}
+
+
+
+
+
+@media (max-width:var(--bp-desktop)){
+  .hamburger{ display:flex !important; }
+  .navbar{ display:none !important; }
+}
